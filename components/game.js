@@ -13,6 +13,7 @@ export function game(spec) {
   let t0;
   let ani_frame_id;
   let score = [0, 0];
+  let ai = true;
 
   const detect_collisions = (t, t0) => {
     collisions = [];
@@ -31,6 +32,19 @@ export function game(spec) {
     collisions.forEach(([b1, b2]) => {
       b1.collide(b2);
     });
+  }
+
+  const paddle2_ai = (ball, paddle2) => {
+    const ball_p = ball.get_p();
+    const ball_v = ball.get_v();
+    const paddle2_p = paddle2.get_p();
+    if (ball_v[0] > 0) {
+      if (paddle2_p[1] > ball_p[1]) {
+        paddle2.set_v([0,-0.5]);
+      } else if (paddle2_p[1] < ball_p[1]) {
+        paddle2.set_v([0,0.5]);
+      }
+    }
   }
 
   const get_rand_v = () => {
@@ -82,11 +96,17 @@ export function game(spec) {
         if (keys[83]) { // s
           paddle1.set_v([0,0.5]);
         }
+
+        if (ai) {
+          paddle2_ai(pong_ball, paddle2);
+        }
         if (keys[38]) { // up
           paddle2.set_v([0,-0.5]);
+          ai = false;
         }
         if (keys[40]) { // down
           paddle2.set_v([0,0.5]);
+          ai = false;
         }
         paddle1.move(t, t0);
         paddle2.move(t, t0);
