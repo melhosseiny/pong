@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>pong</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta name="author" content="Mostafa Elshamy">
+    <meta name="description" content="pong sim">
+    <link rel="stylesheet" href="/css/base.css">
+  </head>
+  <body>
+    <main>
+      <canvas id="game" width="1080" height="600"></canvas>
+    </main>
+    <script type="module">
+      import { game } from "/components/game.js";
+      const gameContext = document.getElementById("game").getContext('2d');
+      game().start(gameContext);
+    </script>
+  </body>
+</html>
