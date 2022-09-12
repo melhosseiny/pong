@@ -6,11 +6,8 @@ const config = {
   d: [15.7, 100],
   m: 70,
   v: [0, 0],
-  a: [0, 0]
-}
-
-function easeInSine(x) {
-  return 1 - Math.cos((x * Math.PI) / 2);
+  a: [0, 0],
+  sound: { f: 459, d: 96 / 1000 }
 }
 
 export function paddle(spec) {

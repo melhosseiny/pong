@@ -1,0 +1,26 @@
+/* reset */
+html, body, section, nav, article, aside, h1, h2, h3,
+h4, h5, h6, hgroup, header, footer, address, p, hr, pre,
+blockquote, ol, ul, li, dl, dt, dd, figure, figcaption,
+div, table, caption, form, fieldset {
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: radial-gradient(circle at 0%, #000, #000 75%, #f06d06 75%, yellow);
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  align-items: center;
+  justify-content: center;
+}
+
+main {
+  display: flex;
+}
+
+canvas {
+  max-width: 100vw;
+}

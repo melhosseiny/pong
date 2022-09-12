@@ -5,7 +5,8 @@ const config = {
   d: [15.7, 15.7],
   m: 2.7,
   v: [0, 0],
-  a: [0, 0]
+  a: [0, 0],
+  sound: { f: 490, d: 257 / 1000 }
 }
 
 export function ball(spec) {

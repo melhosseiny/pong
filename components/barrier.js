@@ -5,7 +5,8 @@ const config = {
   d: [1080, 100],
   m: 100,
   v: [0, 0],
-  a: [0, 0]
+  a: [0, 0],
+  sound: { f: 226, d: 16 / 1000 }
 }
 
 export function barrier(spec) {

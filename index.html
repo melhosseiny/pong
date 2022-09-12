@@ -14,8 +14,9 @@
     </main>
     <script type="module">
       import { game } from "/components/game.js";
-      const gameContext = document.getElementById("game").getContext('2d');
-      game().start(gameContext);
+      const game_context = document.getElementById("game").getContext('2d');
+      const audio_context = new AudioContext();
+      game().start(game_context, audio_context);
     </script>
   </body>
 </html>

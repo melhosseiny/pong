@@ -13,7 +13,8 @@ export function body(spec) {
       }
     });
   }
-  const { context, ...rest } = spec;
+
+  let { context, audio_context, ...rest } = spec;
   let st = state(rest);
 
   const get_p = () => st.p;
@@ -86,18 +87,25 @@ export function body(spec) {
 
     let v1_ = v1_x > 0 && orientation === 'v' || v1_x < 0 && orientation === 'h' ? r[1] : r[0];
     v1_ = [v1_ * Math.cos(-theta), v1_ * Math.sin(-theta)];
-    // const v2_ = Math.sqrt( (m1 / m2) * (v1 * v1 - v1_ * v1_) );
-    // const phi = Math.asin( (m1 * v1_ * Math.sin(-theta)) / (m2 * v2_));
-    // const phi_deg = (180 / Math.PI) * phi;
 
     st.v = v1_;
+    body.make_sound();
+  }
+
+  const make_sound = () => {
+    const note_scillator = audio_context.createOscillator();
+    note_scillator.type = "sine";
+    note_scillator.frequency.setValueAtTime(st.sound.f, audio_context.currentTime);
+    note_scillator.connect(audio_context.destination);
+    note_scillator.start(0);
+    note_scillator.stop(audio_context.currentTime + st.sound.d);
   }
 
   const render = () => {
     const [x, y] = st.p;
     const [w, h] = st.d;
-    st.context.fillStyle = st.fillStyle;
-    st.context.fillRect(x, y, w, h);
+    context.fillStyle = st.fillStyle;
+    context.fillRect(x, y, w, h);
   }
 
   return Object.freeze({
@@ -108,14 +116,13 @@ export function body(spec) {
     get_m,
     get_v,
     set_v,
-    get_a,
-    set_a,
     get_center,
     get_dist_from_center,
     sim_move,
     move,
     will_intersect,
     collide,
+    make_sound,
     render
   })
 }
